@@ -4,6 +4,7 @@ let minDebut = 25;
 let temps = minDebut * 60;
 let timer = document.getElementById("timer"); // Recupere la <div> timer du html.
 
+// Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
 function changementPhase(){
     phaseTravaille = !phaseTravaille;
     if (phaseTravaille === true){
