@@ -1,9 +1,34 @@
 // Initialisation variable de départ
+
+// Designe le temps auquel on change la couleur du timer
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 10;
+const ALERT_THRESHOLD = 5;
+
+// Lest couleurs que va prendre le timer
+const COLOR_CODES = {
+  info: {
+    color: "green"
+  },
+  warning: {
+    color: "orange",
+    threshold: WARNING_THRESHOLD
+  },
+  alert: {
+    color: "red",
+    threshold: ALERT_THRESHOLD
+  }
+};
+
 let phaseTravaille = new Boolean(true);
 let buttonRep = document.getElementById("buttonRep");
-buttonRep.disabled = true;
 let buttonTra = document.getElementById("buttonTra");
-let minDebut = 2 * 60;
+buttonRep.disabled = true;
+let minDebut = 2 * 60; // Designe le temps du timer au lancement
+let timePassed = 0; // Designe le temps qui c'est écoulé
+let timeLeft = minDebut; // Designe le temps restant
+let timerInterval = null;
+let remainingPathColor = COLOR_CODES.info.color;
 
 // Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
 function changementPhase(){
@@ -19,31 +44,7 @@ function changementPhase(){
     }
 }
 
-// Credit: Mateusz Rybczonec
-
-const FULL_DASH_ARRAY = 283;
-const WARNING_THRESHOLD = 10;
-const ALERT_THRESHOLD = 5;
-
-const COLOR_CODES = {
-  info: {
-    color: "green"
-  },
-  warning: {
-    color: "orange",
-    threshold: WARNING_THRESHOLD
-  },
-  alert: {
-    color: "red",
-    threshold: ALERT_THRESHOLD
-  }
-};
-
-let timePassed = 0;
-let timeLeft = minDebut;
-let timerInterval = null;
-let remainingPathColor = COLOR_CODES.info.color;
-
+// Credit: Mateusz Rybczonec -> esthetique du timer
 document.getElementById("app").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -70,6 +71,7 @@ document.getElementById("app").innerHTML = `
 
 startTimer();
 
+// Declanché lorsque le temps arrive à 0
 function onTimesUp() {
   timePassed = 0;
   timeLeft = minDebut;
@@ -78,6 +80,7 @@ function onTimesUp() {
   startTimer();
 }
 
+// Lancement timer
 function startTimer() {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
@@ -94,6 +97,7 @@ function startTimer() {
   }, 1000);
 }
 
+// Formate le timer en minute et seconde
 function formatTime(time) {
   const minutes = Math.floor(time / 60);
   let seconds = time % 60;
@@ -105,6 +109,8 @@ function formatTime(time) {
   return `${minutes}:${seconds}`;
 }
 
+
+// Change la couleur du timer en fonction du temps qu'il reste
 function setRemainingPathColor(timeLeft) {
   const { alert, warning, info } = COLOR_CODES;
   if (timeLeft <= alert.threshold) {
@@ -134,6 +140,7 @@ function setRemainingPathColor(timeLeft) {
   }
 }
 
+// Calcule la portion du cercle à colorer
 function calculateTimeFraction() {
   const rawTimeFraction = timeLeft / minDebut;
   return rawTimeFraction - (1 / minDebut) * (1 - rawTimeFraction);
