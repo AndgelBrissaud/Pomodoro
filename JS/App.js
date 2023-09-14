@@ -8,7 +8,7 @@ const ALERT_THRESHOLD = 5;
 // Lest couleurs que va prendre le timer
 const COLOR_CODES = {
   info: {
-    color: "green"
+    color: "green",
   },
   warning: {
     color: "orange",
@@ -24,7 +24,7 @@ let phaseTravaille = new Boolean(true);
 let buttonRep = document.getElementById("buttonRep");
 let buttonTra = document.getElementById("buttonTra");
 buttonRep.disabled = true;
-let minDebut = 2 * 60; // Designe le temps du timer au lancement
+let minDebut = 1 * 60; // Designe le temps du timer au lancement
 let timePassed = 0; // Designe le temps qui c'est écoulé
 let timeLeft = minDebut; // Designe le temps restant
 let timerInterval = null;
@@ -44,12 +44,10 @@ function changementPhase(){
     }
 }
 
-// Credit: Mateusz Rybczonec -> esthetique du timer
 document.getElementById("app").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g class="base-timer__circle">
-      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
       <path
         id="base-timer-path-remaining"
         stroke-dasharray="283"
@@ -70,6 +68,15 @@ document.getElementById("app").innerHTML = `
 `;
 
 startTimer();
+
+// Permet d'actualiser le timer avec un nouveau temps personnalisé
+function actualiser(){
+  let myMinutes = document.getElementById("minutes").value;
+  let mySecondes = document.getElementById("secondes").value;
+  
+  console.log(myMinutes + " : " +  mySecondes);
+
+}
 
 // Declanché lorsque le temps arrive à 0
 function onTimesUp() {
