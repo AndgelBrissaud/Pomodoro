@@ -15,6 +15,10 @@
     animation: animate 30s ease infinite;
   }
 
+  h1 {
+    font-size: 5em;
+  }
+
 /* animation du background */
 @keyframes animate{
     0%{

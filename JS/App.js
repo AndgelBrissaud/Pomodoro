@@ -24,25 +24,14 @@ let phaseTravaille = new Boolean(true);
 let buttonRep = document.getElementById("buttonRep");
 let buttonTra = document.getElementById("buttonTra");
 buttonRep.disabled = true;
-let minDebut = 1 * 60; // Designe le temps du timer au lancement
 let timePassed = 0; // Designe le temps qui c'est écoulé
-let timeLeft = minDebut; // Designe le temps restant
 let timerInterval = null;
 let remainingPathColor = COLOR_CODES.info.color;
 
-// Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
-function changementPhase(){
-    phaseTravaille = !phaseTravaille;
-    if (phaseTravaille === true){
-        minDebut = 2 * 60;
-        buttonRep.disabled = true;
-        buttonTra.disabled = false;
-    }else {
-        minDebut = 1 * 60;
-        buttonTra.disabled = true;
-        buttonRep.disabled = false;
-    }
-}
+let tempsTra = 25 * 60;
+let tempsRep = 5;
+let tempsActu = tempsTra ; // Designe le temps du timer au lancement
+let timeLeft = tempsActu; // Designe le temps restant
 
 document.getElementById("app").innerHTML = `
 <div class="base-timer">
@@ -69,19 +58,60 @@ document.getElementById("app").innerHTML = `
 
 startTimer();
 
-// Permet d'actualiser le timer avec un nouveau temps personnalisé
+// Fonction pour personnaliser les temps
 function actualiser(){
-  let myMinutes = document.getElementById("minutes").value;
-  let mySecondes = document.getElementById("secondes").value;
-  
-  console.log(myMinutes + " : " +  mySecondes);
+  let minutesT = document.getElementById("minutesT").value;
+  let secondesT = document.getElementById("secondesT").value;
+  let minutesR = document.getElementById("minutesR").value ;
+  let secondesR = document.getElementById("secondesR").value;
+  let myRegex = /^[0-9]+$/;
 
+  // console.log(minutesT + ":" + secondesT);
+  // console.log(minutesR + ":" + secondesR);
+  // console.log(tempsActu);
+    if(minutesT == "" && secondesT != "" && myRegex.test(secondesT)){
+      tempsTra = parseInt(secondesT);
+    }else if(minutesT != "" && secondesT == "" && myRegex.test(minutesT)){
+      tempsTra = parseInt(minutesT * 60);
+    }else if(minutesT != "" && secondesT && myRegex.test(secondesT) && myRegex.test(minutesT)){
+      tempsTra = parseInt(minutesT) * 60 + parseInt(secondesT);
+    }
+    if(minutesR == "" && secondesR != "" && myRegex.test(secondesR)){
+      tempsRep = parseInt(secondesR);
+    }else if(minutesR != "" && secondesR == "" && myRegex.test(minutesR)){
+      tempsRep = parseInt(minutesR * 60);
+    }else if(minutesR != "" && secondesR != "" && myRegex.test(secondesR) && myRegex.test(minutesR)){
+      tempsRep = parseInt(minutesR) * 60 + parseInt(secondesR);
+    }
+    tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
+    timeLeft = tempsActu;
+    timePassed = 0;
+    clearInterval(timerInterval);
+    startTimer();
+     minutesT = 0;
+     secondesT = 0;
+     minutesR = 0;
+     secondesR = 0;
+}
+
+// Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
+function changementPhase(){
+    phaseTravaille = !phaseTravaille;
+    if (phaseTravaille === true){
+        tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
+        buttonRep.disabled = true;
+        buttonTra.disabled = false;
+    }else {
+        tempsActu = tempsRep + 1; // plus 1 car la premiere seconde est consommer instantanement
+        buttonTra.disabled = true;
+        buttonRep.disabled = false;
+    }
 }
 
 // Declanché lorsque le temps arrive à 0
 function onTimesUp() {
   timePassed = 0;
-  timeLeft = minDebut;
+  timeLeft = tempsActu;
   clearInterval(timerInterval);
   changementPhase();
   startTimer();
@@ -91,7 +121,7 @@ function onTimesUp() {
 function startTimer() {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
-    timeLeft = minDebut - timePassed;
+    timeLeft = tempsActu - timePassed;
     document.getElementById("base-timer-label").innerHTML = formatTime(
       timeLeft
     );
@@ -149,8 +179,8 @@ function setRemainingPathColor(timeLeft) {
 
 // Calcule la portion du cercle à colorer
 function calculateTimeFraction() {
-  const rawTimeFraction = timeLeft / minDebut;
-  return rawTimeFraction - (1 / minDebut) * (1 - rawTimeFraction);
+  const rawTimeFraction = timeLeft / tempsActu;
+  return rawTimeFraction - (1 / tempsActu) * (1 - rawTimeFraction);
 }
 
 function setCircleDasharray() {
