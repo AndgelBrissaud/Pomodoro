@@ -64,39 +64,39 @@ function actualiser(){
   let secondesT = document.getElementById("secondesT").value;
   let minutesR = document.getElementById("minutesR").value ;
   let secondesR = document.getElementById("secondesR").value;
-  let myRegex = /^[0-9]+$/;
+  let myRegex = /^[1-9]+$/;
 
   console.log("----------------Actualisation--------------------");
   console.log("Travail " + minutesT + ":" + secondesT);
   console.log("Repos " + minutesR + ":" + secondesR);
   console.log("temps du chrono en sec : " + tempsActu);
-    if(minutesT == "" && secondesT != "" && myRegex.test(secondesT)){
-      tempsTra = parseInt(secondesT);
-    }else if(minutesT != "" && secondesT == "" && myRegex.test(minutesT)){
-      tempsTra = parseInt(minutesT * 60);
-    }else if(minutesT != "" && secondesT && myRegex.test(secondesT) && myRegex.test(minutesT)){
-      tempsTra = parseInt(minutesT) * 60 + parseInt(secondesT);
-    }
-    if(minutesR == "" && secondesR != "" && myRegex.test(secondesR)){
-      tempsRep = parseInt(secondesR);
-    }else if(minutesR != "" && secondesR == "" && myRegex.test(minutesR)){
-      tempsRep = parseInt(minutesR * 60);
-    }else if(minutesR != "" && secondesR != "" && myRegex.test(secondesR) && myRegex.test(minutesR)){
-      tempsRep = parseInt(minutesR) * 60 + parseInt(secondesR);
-    }
-    tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
-    timeLeft = tempsActu;
-    timePassed = 0;
-    clearInterval(timerInterval);
-    startTimer();
-    minutesT = 0;
-    secondesT = 0;
-    minutesR = 0;
-    secondesR = 0;
-    document.getElementById("minutesT").value = '';
-    document.getElementById("secondesT").value = '';
-    document.getElementById("minutesR").value = '';
-    document.getElementById("secondesR").value = '';
+  if(minutesT == "" && secondesT != "" && myRegex.test(secondesT)){
+    tempsTra = parseInt(secondesT);
+  }else if(minutesT != "" && secondesT == "" && myRegex.test(minutesT)){
+    tempsTra = parseInt(minutesT * 60);
+  }else if(minutesT != "" && secondesT && myRegex.test(secondesT) && myRegex.test(minutesT)){
+    tempsTra = parseInt(minutesT) * 60 + parseInt(secondesT);
+  }
+  if(minutesR == "" && secondesR != "" && myRegex.test(secondesR)){
+    tempsRep = parseInt(secondesR);
+  }else if(minutesR != "" && secondesR == "" && myRegex.test(minutesR)){
+    tempsRep = parseInt(minutesR * 60);
+  }else if(minutesR != "" && secondesR != "" && myRegex.test(secondesR) && myRegex.test(minutesR)){
+    tempsRep = parseInt(minutesR) * 60 + parseInt(secondesR);
+  }
+  tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
+  timeLeft = tempsActu;
+  timePassed = 0;
+  clearInterval(timerInterval);
+  startTimer();
+  minutesT = 0;
+  secondesT = 0;
+  minutesR = 0;
+  secondesR = 0;
+  document.getElementById("minutesT").value = '';
+  document.getElementById("secondesT").value = '';
+  document.getElementById("minutesR").value = '';
+  document.getElementById("secondesR").value = '';
 }
 
 // Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
