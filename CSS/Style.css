@@ -17,6 +17,13 @@
     animation: animate 30s ease infinite;
   }
 
+  header{
+    background-color: #E91E63;
+    border-radius: 15px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
   h1 {
     font-size: 5vw;
   }
@@ -95,6 +102,8 @@ button {
   }
 
   .start{
+    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     margin-bottom: 15px;
     font-size: 1.8vw;
@@ -102,6 +111,8 @@ button {
     border-radius: 15px;
   }
   .reinisialisation{
+    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     margin-bottom: 15px;
     width: 15vw;
