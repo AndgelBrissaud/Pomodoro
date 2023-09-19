@@ -72,6 +72,19 @@ button {
     transform: scaleX(1);
   }
 
+  .start:hover::before{
+    transform-origin: center right;
+    transform: scaleX(1);
+  }
+
+  .actualiser{
+    font-size: 1.8vw;
+  }
+
+  .myForm{
+    text-align: center;
+  }
+
   input[type=number] {
     width: 3em;
     font-size: 2vw;
@@ -149,3 +162,64 @@ button {
     justify-content: center;
     font-size: 4vw;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

@@ -24,12 +24,13 @@ let phaseTravaille = new Boolean(true);
 let buttonRep = document.getElementById("buttonRep");
 let buttonTra = document.getElementById("buttonTra");
 buttonRep.disabled = true;
+let buttonStart = document.getElementById("start");
 let timePassed = 0; // Designe le temps qui c'est écoulé
 let timerInterval = null;
 let remainingPathColor = COLOR_CODES.info.color;
 
 let tempsTra = 25 * 60;
-let tempsRep = 5;
+let tempsRep = 5 * 60;
 let tempsActu = tempsTra ; // Designe le temps du timer au lancement
 let timeLeft = tempsActu; // Designe le temps restant
 
@@ -56,7 +57,14 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
-startTimer();
+document.getElementById("start").addEventListener("click", () => {
+    buttonStart.innerHTML =  `<button class="start" id="start">Reinisialiser</button>`;
+    timePassed = 0;
+    timeLeft = tempsActu;
+    clearInterval(timerInterval);
+    tempsActu = tempsTra + 1;
+    startTimer();
+});
 
 // Fonction pour personnaliser les temps
 function actualiser(){
