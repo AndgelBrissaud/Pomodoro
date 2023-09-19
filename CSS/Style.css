@@ -118,6 +118,8 @@ button {
   }
 
   img{
+    width: 2.²5vw;
+    height:2.5vw ;
     cursor: pointer;
     transition: transform .7s ease-in-out;
   }
