@@ -34,7 +34,7 @@
     }
 }
 
-button {
+button:not(.infoButton) {
     height: 3.5vw;
     width: 10vw;
     z-index: 1;
@@ -72,17 +72,59 @@ button {
     transform: scaleX(1);
   }
 
+  #popupButton:hover::before{
+    transform-origin: center right;
+    transform: scaleX(1);
+  }
+
+  .reinisialisation:hover::before{
+    transform-origin: center right;
+    transform: scaleX(1);
+  }
+
   .start:hover::before{
     transform-origin: center right;
     transform: scaleX(1);
   }
 
   .actualiser{
+    cursor: pointer;
     font-size: 1.8vw;
+    border: .2em solid #E91E63;
+    border-radius: 15px;
+  }
+
+  .start{
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 1.8vw;
+    border: .2em solid #E91E63;
+    border-radius: 15px;
+  }
+  .reinisialisation{
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 15vw;
+    font-size: 1.8vw;
+    border: .2em solid #E91E63;
+    border-radius: 15px;
+  }
+
+  img{
+    cursor: pointer;
   }
 
   .myForm{
     text-align: center;
+    background-color: hsl(236, 32%, 26%);
+    border-radius: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #popupButton{
+    height: 3.5vw;
+    width: 30vw;
   }
 
   input[type=number] {
@@ -100,9 +142,6 @@ button {
       background: #fc2f70;
     }
   }
-
-
-
 
   body {
     font-family: sans-serif;
@@ -162,64 +201,3 @@ button {
     justify-content: center;
     font-size: 4vw;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

@@ -8,32 +8,34 @@
 </head>
 <body>
     <h1>Pomodoro</h1>
+
     <div id="phaseTravaille">
         
         <button class="indicateur" id="buttonTra">Travail</button>
         <button class="indicateur" id="buttonRep">Repos</button>
+        <img src="Ressources/info.png" alt="Image info chrono">
     
     </div>
     <div id="app"></div>
 
     <div id="start"><button class="start" id="start" >Start</button></div>
 
+   
     <div class ="myForm">   
         <h3>Travail</h3>
-        <label>Min</label>
+        <label for="minutesT">Min</label>
         <input type="number" name="minutes" id="minutesT">
-        <label>Sec</label>
+        <label for="secondesT">Sec</label>
         <input type="number" name="secondes" id="secondesT">
         <br><br>
         <h3>Repos</h3>
-        <label>Min</label>
+        <label for="minutesR">Min</label>
         <input type="number" name="minutes" id="minutesR">
-        <label>Sec</label>
+        <label for="secondesR">Sec</label>
         <input type="number" name="secondes" id="secondesR">
         <br><br>
         <button class="actualiser" onclick="actualiser()">Actualiser</button>
     </div>
-
     
     <script src="JS/App.js"></script>
 </body>

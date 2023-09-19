@@ -58,7 +58,7 @@ document.getElementById("app").innerHTML = `
 `;
 
 document.getElementById("start").addEventListener("click", () => {
-    buttonStart.innerHTML =  `<button class="start" id="start">Reinisialiser</button>`;
+    buttonStart.innerHTML =  `<button class="reinisialisation" id="start">Reinisialiser</button>`;
     timePassed = 0;
     timeLeft = tempsActu;
     clearInterval(timerInterval);
@@ -211,3 +211,10 @@ function setCircleDasharray() {
     .getElementById("base-timer-path-remaining")
     .setAttribute("stroke-dasharray", circleDasharray);
 }
+
+
+
+
+
+
+
