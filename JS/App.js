@@ -58,7 +58,7 @@ document.getElementById("app").innerHTML = `
 `;
 
 document.getElementById("start").addEventListener("click", () => {
-    buttonStart.innerHTML =  `<button class="reinisialisation" id="start">Reinisialiser</button>`;
+    buttonStart.innerHTML =  `<button class="reinisialisation" id="start">Reinitialiser</button>`;
     timePassed = 0;
     timeLeft = tempsActu;
     clearInterval(timerInterval);
