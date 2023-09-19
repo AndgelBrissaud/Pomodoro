@@ -74,10 +74,6 @@ function actualiser(){
   let secondesR = document.getElementById("secondesR").value;
   let myRegex = /^[1-9]+$/;
 
-  console.log("----------------Actualisation--------------------");
-  console.log("Travail " + minutesT + ":" + secondesT);
-  console.log("Repos " + minutesR + ":" + secondesR);
-  console.log("temps du chrono en sec : " + tempsActu);
   if(minutesT == "" && secondesT != "" && myRegex.test(secondesT)){
     tempsTra = parseInt(secondesT);
   }else if(minutesT != "" && secondesT == "" && myRegex.test(minutesT)){
@@ -85,6 +81,7 @@ function actualiser(){
   }else if(minutesT != "" && secondesT && myRegex.test(secondesT) && myRegex.test(minutesT)){
     tempsTra = parseInt(minutesT) * 60 + parseInt(secondesT);
   }
+
   if(minutesR == "" && secondesR != "" && myRegex.test(secondesR)){
     tempsRep = parseInt(secondesR);
   }else if(minutesR != "" && secondesR == "" && myRegex.test(minutesR)){
@@ -92,6 +89,12 @@ function actualiser(){
   }else if(minutesR != "" && secondesR != "" && myRegex.test(secondesR) && myRegex.test(minutesR)){
     tempsRep = parseInt(minutesR) * 60 + parseInt(secondesR);
   }
+
+  // console.log("----------------Actualisation--------------------");
+  // console.log("Travail " + minutesT + ":" + secondesT);
+  // console.log("Repos " + minutesR + ":" + secondesR);
+  // console.log("temps du chrono en sec : " + tempsActu);
+
   tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
   timeLeft = tempsActu;
   timePassed = 0;
@@ -112,12 +115,16 @@ function changementPhase(){
     phaseTravaille = !phaseTravaille;
     if (phaseTravaille === true){
         tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
+        // console.log(tempsActu);
         buttonRep.disabled = true;
         buttonTra.disabled = false;
+        phaseTravaille = false;
     }else {
         tempsActu = tempsRep + 1; // plus 1 car la premiere seconde est consommer instantanement
+        // console.log(tempsActu);
         buttonTra.disabled = true;
         buttonRep.disabled = false;
+        phaseTravaille = true;
     }
 }
 
