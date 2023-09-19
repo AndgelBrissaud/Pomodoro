@@ -131,7 +131,7 @@ button {
   .myForm{
     text-align: center;
     background-color: hsl(236, 32%, 26%);
-    border-radius: 50px;
+    border-radius: 1em;
     padding-left: 20px;
     padding-right: 20px;
   }
