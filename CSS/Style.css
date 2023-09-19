@@ -34,7 +34,7 @@
     }
 }
 
-button:not(.infoButton) {
+button {
     height: 3.5vw;
     width: 10vw;
     z-index: 1;
@@ -109,9 +109,21 @@ button:not(.infoButton) {
     border: .2em solid #E91E63;
     border-radius: 15px;
   }
+  
+
+  #close{
+    float: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 
   img{
     cursor: pointer;
+    transition: transform .7s ease-in-out;
+  }
+
+  img:hover {
+    transform: rotate(360deg);
   }
 
   .myForm{

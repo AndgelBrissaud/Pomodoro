@@ -13,29 +13,16 @@
         
         <button class="indicateur" id="buttonTra">Travail</button>
         <button class="indicateur" id="buttonRep">Repos</button>
-        <img src="Ressources/info.png" alt="Image info chrono">
+        <img src="Ressources/info.png" onclick="afficheInfo()" alt="Image info chrono"/>
+        <img src="Ressources/info.png" onclick="afficheForm()" alt="Image info chrono"/>
     
     </div>
     <div id="app"></div>
 
     <div id="start"><button class="start" id="start" >Start</button></div>
 
-   
-    <div class ="myForm">   
-        <h3>Travail</h3>
-        <label for="minutesT">Min</label>
-        <input type="number" name="minutes" id="minutesT">
-        <label for="secondesT">Sec</label>
-        <input type="number" name="secondes" id="secondesT">
-        <br><br>
-        <h3>Repos</h3>
-        <label for="minutesR">Min</label>
-        <input type="number" name="minutes" id="minutesR">
-        <label for="secondesR">Sec</label>
-        <input type="number" name="secondes" id="secondesR">
-        <br><br>
-        <button class="actualiser" onclick="actualiser()">Actualiser</button>
-    </div>
+    <div class ="myForm" id="myForm"></div>
+    <div class ="myForm" id="myInfo"></div>
     
     <script src="JS/App.js"></script>
 </body>

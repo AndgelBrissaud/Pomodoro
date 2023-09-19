@@ -212,8 +212,46 @@ function setCircleDasharray() {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 
+function afficheForm(){
+  let myForm = document.getElementById("myForm");
+  myForm.innerHTML = `<img id="close" onclick="enleveForm()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
+  <h3>Travail</h3>
+  <label for="minutesT">Min</label>
+  <input type="number" name="minutes" id="minutesT">
+  <label for="secondesT">Sec</label>
+  <input type="number" name="secondes" id="secondesT">
+  <br><br>
+  <h3>Repos</h3>
+  <label for="minutesR">Min</label>
+  <input type="number" name="minutes" id="minutesR">
+  <label for="secondesR">Sec</label>
+  <input type="number" name="secondes" id="secondesR">
+  <br><br>
+  <button class="actualiser" onclick="actualiser()">Actualiser</button>`;
+}
+
+function enleveForm(){
+  // console.log("retire form");
+  let myForm = document.getElementById("myForm");
+  myForm.innerHTML = '';
+}
+
+function afficheInfo(){
+  let myInfo = document.getElementById("myInfo");
+  myInfo.innerHTML = `<img id="close" onclick="enleveInfo()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
+  <h3>Travail</h3>
+  <p>${tempsTra} secondes<p>
+  <br><br>
+  <h3>Repos</h3>
+  <p>${tempsRep} secondes<p>`;
+}
 
 
+function enleveInfo(){
+  // console.log("retire info");
+  let myInfo = document.getElementById("myInfo");
+  myInfo.innerHTML = ``;
+}
 
 
 
