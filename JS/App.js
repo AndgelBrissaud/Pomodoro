@@ -121,10 +121,7 @@ function actualiser(){
   secondesT = 0;
   minutesR = 0;
   secondesR = 0;
-  document.getElementById("minutesT").value = '';
-  document.getElementById("secondesT").value = '';
-  document.getElementById("minutesR").value = '';
-  document.getElementById("secondesR").value = '';
+  afficheForm();
 }
 
 // Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
@@ -234,15 +231,15 @@ function afficheForm(){
   myForm.innerHTML = `<img id="close" onclick="enleveForm()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
   <h3>Travail</h3>
   <label for="minutesT">Min</label>
-  <input type="number" name="minutes" id="minutesT">
+  <input type="number" name="minutes" id="minutesT" min="0" value="${Math.floor(tempsTra / 60)}">
   <label for="secondesT">Sec</label>
-  <input type="number" name="secondes" id="secondesT">
+  <input type="number" name="secondes" id="secondesT" min="0" value="${tempsTra % 60}">
   <br><br>
   <h3>Repos</h3>
   <label for="minutesR">Min</label>
-  <input type="number" name="minutes" id="minutesR">
+  <input type="number" name="minutes" id="minutesR" min="0" value="${Math.floor(tempsRep / 60)}">
   <label for="secondesR">Sec</label>
-  <input type="number" name="secondes" id="secondesR">
+  <input type="number" name="secondes" id="secondesR" min="0" value="${tempsRep % 60}">
   <br><br>
   <button class="actualiser" onclick="actualiser()">Actualiser</button>`;
 }
