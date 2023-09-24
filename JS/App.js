@@ -86,7 +86,7 @@ function actualiser(){
   let secondesT = document.getElementById("secondesT").value;
   let minutesR = document.getElementById("minutesR").value ;
   let secondesR = document.getElementById("secondesR").value;
-  let myRegex = /^[1-9]+$/;
+  let myRegex = /^[0-9]+$/;
 
   if(minutesT == "" && secondesT != "" && myRegex.test(secondesT)){
     tempsTra = parseInt(secondesT);
