@@ -57,14 +57,28 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
-document.getElementById("start").addEventListener("click", () => {
-    buttonStart.innerHTML =  `<button class="reinisialisation" id="start">Reinitialiser</button>`;
+function demarer() {
+    buttonStart.innerHTML =  `<button class="reinisialisation" onclick="reinitialisation()" >Reinitialiser</button>`;
     timePassed = 0;
+    tempsActu = tempsTra;
     timeLeft = tempsActu;
     clearInterval(timerInterval);
-    tempsActu = tempsTra + 1;
     startTimer();
-});
+}
+
+function reinitialisation(){
+  console.log('reini');
+  buttonStart.innerHTML =  `<button class="reinisialisation" onclick="demarer()">Start</button>`;
+  timePassed = 0;
+  clearInterval(timerInterval);
+  tempsActu = tempsTra ;
+  timeLeft = tempsActu;
+  document.getElementById("base-timer-label").innerHTML = formatTime(
+    timeLeft
+  );
+  setCircleDasharray();
+  setRemainingPathColor(timeLeft);
+}
 
 // Fonction pour personnaliser les temps
 function actualiser(){
@@ -95,11 +109,14 @@ function actualiser(){
   // console.log("Repos " + minutesR + ":" + secondesR);
   // console.log("temps du chrono en sec : " + tempsActu);
 
-  tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
+  tempsActu = tempsTra ;
   timeLeft = tempsActu;
   timePassed = 0;
   clearInterval(timerInterval);
-  startTimer();
+  buttonStart.innerHTML =  `<button class="reinisialisation" onclick="demarer()">Start</button>`;
+  document.getElementById("base-timer-label").innerHTML = formatTime(
+    timeLeft
+  );
   minutesT = 0;
   secondesT = 0;
   minutesR = 0;
