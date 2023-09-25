@@ -60,7 +60,7 @@ document.getElementById("app").innerHTML = `
 `;
 
 // Function to start tme with button
-function demarer() {
+function start() {
     startButton.innerHTML =  `<button class="reset" onclick="reinitialisation()" >Reset</button>`;
     timePassed = 0;
     currentTime = workTime;
@@ -72,7 +72,7 @@ function demarer() {
 // Function to reset time
 function reinitialisation(){
   console.log('reini');
-  startButton.innerHTML =  `<button class="reset" onclick="demarer()">Start</button>`;
+  startButton.innerHTML =  `<button class="reset" onclick="start()">Start</button>`;
   timePassed = 0;
   clearInterval(timerInterval);
   currentTime = workTime ;
@@ -117,7 +117,7 @@ function update(){
   timeLeft = currentTime;
   timePassed = 0;
   clearInterval(timerInterval);
-  startButton.innerHTML =  `<button class="reinisialisation" onclick="demarer()">Start</button>`;
+  startButton.innerHTML =  `<button class="start" onclick="start()">Start</button>`;
   document.getElementById("base-timer-label").innerHTML = formatTime(
     timeLeft
   );
@@ -234,13 +234,13 @@ function setCircleDasharray() {
 function printForm(){
   let myForm = document.getElementById("myForm");
   myForm.innerHTML = `<img id="close" onclick="removeForm()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
-  <h3>Travail</h3>
+  <h3>Work time</h3>
   <label for="minutesT">Min</label>
   <input type="number" name="minutes" id="minutesT" min="0" value="${Math.floor(workTime / 60)}">
   <label for="secondesT">Sec</label>
   <input type="number" name="secondes" id="secondesT" min="0" value="${workTime % 60}">
   <br><br>
-  <h3>Repos</h3>
+  <h3>Rest time</h3>
   <label for="minutesR">Min</label>
   <input type="number" name="minutes" id="minutesR" min="0" value="${Math.floor(restTime / 60)}">
   <label for="secondesR">Sec</label>
