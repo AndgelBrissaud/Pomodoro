@@ -80,6 +80,9 @@ function reinitialisation(){
   document.getElementById("base-timer-label").innerHTML = formatTime(
     timeLeft
   );
+  restButton.disabled = true;
+  workButton.disabled = false;
+  workPhase = false;
   setCircleDasharray();
   setRemainingPathColor(timeLeft);
 }
