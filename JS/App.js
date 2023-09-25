@@ -19,7 +19,7 @@ const COLOR_CODES = {
     threshold: ALERT_THRESHOLD
   }
 };
-
+let audio = new Audio("Ressources/ping.mp3");
 let workPhase = new Boolean(true);
 let restButton = document.getElementById("restButton");
 let workButton = document.getElementById("workButton");
@@ -148,6 +148,7 @@ function phaseChange(){
 
 // Triggered when time reaches 0
 function onTimesUp() {
+  audio.play();
   timePassed = 0;
   timeLeft = currentTime;
   clearInterval(timerInterval);
