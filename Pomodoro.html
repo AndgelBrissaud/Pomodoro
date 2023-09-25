@@ -7,15 +7,14 @@
     <title>Pomodoro</title>
 </head>
 <header>
-    <img src="Ressources/info.png" onclick="afficheInfo()" alt="Image info chrono"/>
-    <img src="Ressources/chrono.png" onclick="afficheForm()" alt="Image info chrono"/>
+    <img src="Ressources/info.png" onclick="PrintInfo()" alt="Image info chrono"/>
+    <img src="Ressources/chrono.png" onclick="printForm()" alt="Image info chrono"/>
 </header>
 <body>
     <h1>Pomodoro</h1>
-
-    <div id="phaseTravaille">
-        <button class="indicateur" id="buttonTra">Travail</button>
-        <button class="indicateur" id="buttonRep">Repos</button>
+    <div>
+        <button class="infoPanel" id="workButton">Work</button>
+        <button class="infoPanel" id="restButton">Rest</button>
     </div>
     <div id="app"></div>        
     <div id="start"><button class="start" onclick="demarer()" >Start</button></div>

@@ -15,6 +15,12 @@
     width: 100%;
   }
 
+  body {
+    font-family: sans-serif;
+    display: grid;
+    place-items: center;
+  }
+
   header{
     background-color: #E91E63;
     border-radius: 15px;
@@ -26,7 +32,7 @@
     font-size: 8vh;
   }
 
-/* animation du background */
+/* animation of background */
 @keyframes animate{
     0%{
         background-position: 0 50%;
@@ -39,6 +45,7 @@
     }
 }
 
+/* BUTTON AND THERE PANELS*/
 button {
     height: 6vh;
     width: 15vh;
@@ -67,12 +74,12 @@ button {
     transition: transform 0.25s ease-in-out;
   }
 
-  .indicateur:enabled::before {
+  .infoPanel:enabled::before {
     transform-origin: center right;
     transform: scaleX(1);
   } 
 
-  .actualiser:hover::before{
+  .update:hover::before{
     transform-origin: center right;
     transform: scaleX(1);
   }
@@ -82,7 +89,7 @@ button {
     transform: scaleX(1);
   }
 
-  .reinisialisation:hover::before{
+  .reset:hover::before{
     transform-origin: center right;
     transform: scaleX(1);
   }
@@ -92,7 +99,7 @@ button {
     transform: scaleX(1);
   }
 
-  .actualiser{
+  .update{
     cursor: pointer;
     font-size: 1.8vh;
     border: .2em solid #E91E63;
@@ -109,7 +116,7 @@ button {
     border: .2em solid #E91E63;
     border-radius: 15px;
   }
-  .reinisialisation{
+  .reset{
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -167,11 +174,8 @@ button {
     }
   }
 
-  body {
-    font-family: sans-serif;
-    display: grid;
-    place-items: center;
-  }
+
+  /* TIMER */
   
   .base-timer {
     position: relative;

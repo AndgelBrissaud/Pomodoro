@@ -1,11 +1,11 @@
-// Initialisation variable de départ
+// Starting variable initialization
 
-// Designe le temps auquel on change la couleur du timer
+// Designates the time at which we change the color of the timer
 const FULL_DASH_ARRAY = 283;
 const WARNING_THRESHOLD = 10;
 const ALERT_THRESHOLD = 5;
 
-// Lest couleurs que va prendre le timer
+// The colors that the timer will take
 const COLOR_CODES = {
   info: {
     color: "green",
@@ -20,20 +20,22 @@ const COLOR_CODES = {
   }
 };
 
-let phaseTravaille = new Boolean(true);
-let buttonRep = document.getElementById("buttonRep");
-let buttonTra = document.getElementById("buttonTra");
-buttonRep.disabled = true;
-let buttonStart = document.getElementById("start");
-let timePassed = 0; // Designe le temps qui c'est écoulé
+let workPhase = new Boolean(true);
+let restButton = document.getElementById("restButton");
+let workButton = document.getElementById("workButton");
+restButton.disabled = true; // initialization of info button
+let startButton = document.getElementById("start");
+let timePassed = 0; // Point out the time that has passed
 let timerInterval = null;
-let remainingPathColor = COLOR_CODES.info.color;
+let remainingPathColor = COLOR_CODES.info.color; // default timer color
 
-let tempsTra = 25 * 60;
-let tempsRep = 5 * 60;
-let tempsActu = tempsTra ; // Designe le temps du timer au lancement
-let timeLeft = tempsActu; // Designe le temps restant
+let workTime = 25 * 60; // Default work time
+let restTime = 5 * 60; // Default rest time
+let currentTime = workTime ; // Designates the timer time at launch
+let timeLeft = currentTime; // Designate the remaining time
 
+
+// Print the timer
 document.getElementById("app").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -57,22 +59,24 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
+// Function to start tme with button
 function demarer() {
-    buttonStart.innerHTML =  `<button class="reinisialisation" onclick="reinitialisation()" >Reinitialiser</button>`;
+    startButton.innerHTML =  `<button class="reset" onclick="reinitialisation()" >Reset</button>`;
     timePassed = 0;
-    tempsActu = tempsTra;
-    timeLeft = tempsActu;
+    currentTime = workTime;
+    timeLeft = currentTime;
     clearInterval(timerInterval);
     startTimer();
 }
 
+// Function to reset time
 function reinitialisation(){
   console.log('reini');
-  buttonStart.innerHTML =  `<button class="reinisialisation" onclick="demarer()">Start</button>`;
+  startButton.innerHTML =  `<button class="reset" onclick="demarer()">Start</button>`;
   timePassed = 0;
   clearInterval(timerInterval);
-  tempsActu = tempsTra ;
-  timeLeft = tempsActu;
+  currentTime = workTime ;
+  timeLeft = currentTime;
   document.getElementById("base-timer-label").innerHTML = formatTime(
     timeLeft
   );
@@ -80,8 +84,8 @@ function reinitialisation(){
   setRemainingPathColor(timeLeft);
 }
 
-// Fonction pour personnaliser les temps
-function actualiser(){
+// Function to personalize times
+function update(){
   let minutesT = document.getElementById("minutesT").value;
   let secondesT = document.getElementById("secondesT").value;
   let minutesR = document.getElementById("minutesR").value ;
@@ -89,31 +93,31 @@ function actualiser(){
   let myRegex = /^[0-9]+$/;
 
   if(minutesT == "" && secondesT != "" && myRegex.test(secondesT)){
-    tempsTra = parseInt(secondesT);
+    workTime = parseInt(secondesT);
   }else if(minutesT != "" && secondesT == "" && myRegex.test(minutesT)){
-    tempsTra = parseInt(minutesT * 60);
+    workTime = parseInt(minutesT * 60);
   }else if(minutesT != "" && secondesT && myRegex.test(secondesT) && myRegex.test(minutesT)){
-    tempsTra = parseInt(minutesT) * 60 + parseInt(secondesT);
+    workTime = parseInt(minutesT) * 60 + parseInt(secondesT);
   }
 
   if(minutesR == "" && secondesR != "" && myRegex.test(secondesR)){
-    tempsRep = parseInt(secondesR);
+    restTime = parseInt(secondesR);
   }else if(minutesR != "" && secondesR == "" && myRegex.test(minutesR)){
-    tempsRep = parseInt(minutesR * 60);
+    restTime = parseInt(minutesR * 60);
   }else if(minutesR != "" && secondesR != "" && myRegex.test(secondesR) && myRegex.test(minutesR)){
-    tempsRep = parseInt(minutesR) * 60 + parseInt(secondesR);
+    restTime = parseInt(minutesR) * 60 + parseInt(secondesR);
   }
 
   // console.log("----------------Actualisation--------------------");
   // console.log("Travail " + minutesT + ":" + secondesT);
   // console.log("Repos " + minutesR + ":" + secondesR);
-  // console.log("temps du chrono en sec : " + tempsActu);
+  // console.log("temps du chrono en sec : " + currentTime);
 
-  tempsActu = tempsTra ;
-  timeLeft = tempsActu;
+  currentTime = workTime ;
+  timeLeft = currentTime;
   timePassed = 0;
   clearInterval(timerInterval);
-  buttonStart.innerHTML =  `<button class="reinisialisation" onclick="demarer()">Start</button>`;
+  startButton.innerHTML =  `<button class="reinisialisation" onclick="demarer()">Start</button>`;
   document.getElementById("base-timer-label").innerHTML = formatTime(
     timeLeft
   );
@@ -121,41 +125,41 @@ function actualiser(){
   secondesT = 0;
   minutesR = 0;
   secondesR = 0;
-  afficheForm();
+  printForm();
 }
 
-// Fonction pour changer de phase(temps timer) entre phase travaille et phase repos
-function changementPhase(){
-    phaseTravaille = !phaseTravaille;
-    if (phaseTravaille === true){
-        tempsActu = tempsTra + 1; // plus 1 car la premiere seconde est consommer instantanement
-        // console.log(tempsActu);
-        buttonRep.disabled = true;
-        buttonTra.disabled = false;
-        phaseTravaille = false;
+// Function to change phase (timer time) between working phase and rest phase
+function phaseChange(){
+  workPhase = !workPhase;
+    if (workPhase === true){
+      currentTime = workTime + 1; // plus 1 because the first second is consumed instantly
+        // console.log(currentTime);
+        restButton.disabled = true;
+        workButton.disabled = false;
+        workPhase = false;
     }else {
-        tempsActu = tempsRep + 1; // plus 1 car la premiere seconde est consommer instantanement
-        // console.log(tempsActu);
-        buttonTra.disabled = true;
-        buttonRep.disabled = false;
-        phaseTravaille = true;
+      currentTime = restTime + 1; // plus 1 because the first second is consumed instantly
+        // console.log(currentTime);
+        workButton.disabled = true;
+        restButton.disabled = false;
+        workPhase = true;
     }
 }
 
-// Declanché lorsque le temps arrive à 0
+// Triggered when time reaches 0
 function onTimesUp() {
   timePassed = 0;
-  timeLeft = tempsActu;
+  timeLeft = currentTime;
   clearInterval(timerInterval);
-  changementPhase();
+  phaseChange();
   startTimer();
 }
 
-// Lancement timer
+// start the timer
 function startTimer() {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
-    timeLeft = tempsActu - timePassed;
+    timeLeft = currentTime - timePassed;
     document.getElementById("base-timer-label").innerHTML = formatTime(
       timeLeft
     );
@@ -168,7 +172,7 @@ function startTimer() {
   }, 1000);
 }
 
-// Formate le timer en minute et seconde
+// Format the timer in minutes and seconds
 function formatTime(time) {
   const minutes = Math.floor(time / 60);
   let seconds = time % 60;
@@ -181,7 +185,7 @@ function formatTime(time) {
 }
 
 
-// Change la couleur du timer en fonction du temps qu'il reste
+// Change the color of the timer depending on the time remaining
 function setRemainingPathColor(timeLeft) {
   const { alert, warning, info } = COLOR_CODES;
   if (timeLeft <= alert.threshold) {
@@ -211,10 +215,10 @@ function setRemainingPathColor(timeLeft) {
   }
 }
 
-// Calcule la portion du cercle à colorer
+// Calculate the portion of the circle to color
 function calculateTimeFraction() {
-  const rawTimeFraction = timeLeft / tempsActu;
-  return rawTimeFraction - (1 / tempsActu) * (1 - rawTimeFraction);
+  const rawTimeFraction = timeLeft / currentTime;
+  return rawTimeFraction - (1 / currentTime) * (1 - rawTimeFraction);
 }
 
 function setCircleDasharray() {
@@ -226,42 +230,46 @@ function setCircleDasharray() {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 
-function afficheForm(){
+// Print the update form panel
+function printForm(){
   let myForm = document.getElementById("myForm");
-  myForm.innerHTML = `<img id="close" onclick="enleveForm()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
+  myForm.innerHTML = `<img id="close" onclick="removeForm()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
   <h3>Travail</h3>
   <label for="minutesT">Min</label>
-  <input type="number" name="minutes" id="minutesT" min="0" value="${Math.floor(tempsTra / 60)}">
+  <input type="number" name="minutes" id="minutesT" min="0" value="${Math.floor(workTime / 60)}">
   <label for="secondesT">Sec</label>
-  <input type="number" name="secondes" id="secondesT" min="0" value="${tempsTra % 60}">
+  <input type="number" name="secondes" id="secondesT" min="0" value="${workTime % 60}">
   <br><br>
   <h3>Repos</h3>
   <label for="minutesR">Min</label>
-  <input type="number" name="minutes" id="minutesR" min="0" value="${Math.floor(tempsRep / 60)}">
+  <input type="number" name="minutes" id="minutesR" min="0" value="${Math.floor(restTime / 60)}">
   <label for="secondesR">Sec</label>
-  <input type="number" name="secondes" id="secondesR" min="0" value="${tempsRep % 60}">
+  <input type="number" name="secondes" id="secondesR" min="0" value="${restTime % 60}">
   <br><br>
-  <button class="actualiser" onclick="actualiser()">Actualiser</button>`;
+  <button class="update" onclick="update()">Update</button>`;
 }
 
-function enleveForm(){
+
+// Remove the update form panel
+function removeForm(){
   // console.log("retire form");
   let myForm = document.getElementById("myForm");
   myForm.innerHTML = '';
 }
 
-function afficheInfo(){
+// Print the information panel
+function PrintInfo(){
   let myInfo = document.getElementById("myInfo");
-  myInfo.innerHTML = `<img id="close" onclick="enleveInfo()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
-  <h3>Travail</h3>
-  <p>${tempsTra} secondes<p>
+  myInfo.innerHTML = `<img id="close" onclick="removeInfo()" src="Ressources/close.png" alt="Image fermeture fenetre"/>   
+  <h3>Work time</h3>
+  <p>${Math.floor(workTime / 60)} : ${workTime % 60}<p>
   <br><br>
-  <h3>Repos</h3>
-  <p>${tempsRep} secondes<p>`;
+  <h3>Rest time</h3>
+  <p>${Math.floor(restTime / 60)} : ${restTime % 60}<p>`;
 }
 
-
-function enleveInfo(){
+// Remove the information panel
+function removeInfo(){
   // console.log("retire info");
   let myInfo = document.getElementById("myInfo");
   myInfo.innerHTML = ``;
