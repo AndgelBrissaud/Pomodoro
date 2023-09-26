@@ -82,7 +82,7 @@ function reinitialisation(){
   );
   restButton.disabled = true;
   workButton.disabled = false;
-  workPhase = false;
+  workPhase = true;
   setCircleDasharray();
   setRemainingPathColor(timeLeft);
 }
@@ -133,20 +133,18 @@ function update(){
 
 // Function to change phase (timer time) between working phase and rest phase
 function phaseChange(){
-  workPhase = !workPhase;
-    if (workPhase === true){
-      currentTime = workTime + 1; // plus 1 because the first second is consumed instantly
-        // console.log(currentTime);
-        restButton.disabled = true;
-        workButton.disabled = false;
-        workPhase = false;
-    }else {
-      currentTime = restTime + 1; // plus 1 because the first second is consumed instantly
-        // console.log(currentTime);
-        workButton.disabled = true;
-        restButton.disabled = false;
-        workPhase = true;
-    }
+  console.log(workPhase);
+  if (workPhase != true){
+    currentTime = workTime + 1; // plus 1 because the first second is consumed instantly
+    restButton.disabled = true;
+    workButton.disabled = false;
+    workPhase = true;
+  }else {
+    currentTime = restTime + 1; // plus 1 because the first second is consumed instantly
+    workButton.disabled = true;
+    restButton.disabled = false;
+    workPhase = false;
+  }
 }
 
 // Triggered when time reaches 0
@@ -170,7 +168,7 @@ function startTimer() {
     setCircleDasharray();
     setRemainingPathColor(timeLeft);
 
-    if (timeLeft === 0) {
+    if (timeLeft <= 0) {
       onTimesUp();
     }
   }, 1000);
